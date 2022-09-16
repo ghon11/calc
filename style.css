@@ -1,5 +1,9 @@
+page {
+    display: flex;
+}
+
 .header {
-    
+    justify-content: center;
 }
 
 .content {
