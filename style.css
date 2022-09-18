@@ -1,8 +1,5 @@
-page {
+.header,.footer {
     display: flex;
-}
-
-.header {
     justify-content: center;
 }
 
@@ -37,49 +34,18 @@ page {
     justify-content: space-evenly;
 }
 
-.row0 {
+.row {
     display: flex;
     border: solid;
     flex: 1;
 }
 
-.row1 {
-    display: flex;
-    border:solid;
-    flex: 1;
-}
-
-.row2 {
-    display: flex;
-    border:solid;
-    flex: 1;
-}
-
-.row3 {
-    display: flex;
-    border:solid;
-    flex: 1;
-}
-
-.row4 {
-    display: flex;
-    border:solid;
-    flex: 1;
-    
-}
-
 .button {
     border:solid;
-    display: flex;
-    width:100%;
+    flex: auto;
 }
 
 .doubleButton {
-    width:100%;
     border:solid;
-    display: flex;
-}
-
-.footer {
-
+    flex: auto;
 }
