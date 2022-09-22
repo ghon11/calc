@@ -36,16 +36,23 @@
 
 .row {
     display: flex;
-    border: solid;
     flex: 1;
 }
 
 .button {
     border:solid;
     flex: auto;
+    font-size: 100%;
+    border-width: 1px;
+    padding: 0;
+    margin: 0;
 }
 
 .doubleButton {
     border:solid;
+    border-width: 1px;
     flex: auto;
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
 }
