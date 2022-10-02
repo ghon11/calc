@@ -14,11 +14,21 @@ divide = function(a, b,) {
     return a / b;
 };
 
-operate = function(a, b, operator) {
-    return operator(a, b);
+operate = function(a, b, currentIndex) {
+  a=parseInt(a);
+  b=parseInt(b);
+  return opArray[currentIndex-1](a,b);
+}
+
+function updateValue() {
+  document.getElementsByClassName("display")[0].innerText = displayValue;
 }
 
 let displayValue = "";
+let numCount = 0;
+let opCount = 0;
+let numArray = [];
+let opArray = [];
 
 const oneBtn = document.querySelector("#one");
 oneBtn.addEventListener('click', () => {
@@ -80,7 +90,41 @@ zeroBtn.addEventListener('click', () => {
   updateValue();
 });
 
-function updateValue() {
-    document.getElementsByClassName("display")[0].innerText = displayValue;
-    console.log(displayValue);
-}
+const addBtn = document.querySelector("#add");
+addBtn.addEventListener('click', () => {
+  numCount = numArray.push(displayValue);
+  opCount = opArray.push(add);
+  displayValue = "";
+})  
+
+const divBtn = document.querySelector("#divide");
+divBtn.addEventListener('click', () => {
+  numCount = numArray.push(displayValue);
+  opCount = opArray.push(divide);
+  displayValue = "";
+}) 
+
+const subBtn = document.querySelector("#subtract");
+subBtn.addEventListener('click', () => {
+  numCount = numArray.push(displayValue);
+  opCount = opArray.push(subtract);
+  displayValue = "";
+}) 
+
+const multBtn = document.querySelector("#multiply");
+multBtn.addEventListener('click', () => {
+  numCount = numArray.push(displayValue);
+  opCount = opArray.push(multiply);
+  displayValue = "";
+}) 
+
+const equalsBtn = document.querySelector("#equals");
+equalsBtn.addEventListener('click', () => {
+  numCount = numArray.push(displayValue);
+  displayValue = numArray.reduce(operate);
+  updateValue();
+  numArray = [];
+  opArray = [];
+  displayValue="";
+})
+
