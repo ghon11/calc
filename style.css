@@ -13,10 +13,11 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 50vw;
+    width: 25vw;
     height: 50vh;
     border: solid;
     background-color: grey;
+    border-radius: 25px;
 }
 
 .display {
@@ -24,6 +25,8 @@
     background-color: lightgrey;
     width:100%;
     height:20%;
+    font-size:10vh;
+    border-radius: 25px;
 }
 
 .keypad {
@@ -41,18 +44,27 @@
 
 .button {
     border:solid;
-    flex: auto;
-    font-size: 100%;
+    flex: 1;
+    font-size: 5vh;
     border-width: 1px;
     padding: 0;
     margin: 0;
+    font-family: Courier, monospace;
+    border-radius: 25px;
 }
 
 .doubleButton {
     border:solid;
     border-width: 1px;
-    flex: auto;
-    font-size: 100%;
+    flex: 1;
+    font-size: 5vh;
+    border-width: 1px;
     padding: 0;
     margin: 0;
+    font-family: Courier, monospace;
+    border-radius: 25px;
+}
+
+.operator {
+    background-color: red;
 }
