@@ -1,3 +1,5 @@
+//Math Operator functions
+
 add = function(a, b) {
     return a + b;
 };
@@ -14,10 +16,39 @@ divide = function(a, b,) {
     return a / b;
 };
 
-operate = function(a, b, currentIndex) {
+/* operate = function(a, b, currentIndex) {
   a=parseInt(a);
   b=parseInt(b);
   return opArray[currentIndex-1](a,b);
+} */
+
+let a = null;
+let b = null;
+let operation = null;
+let nextOperation = null;
+
+
+assignValue = function(nextNumber, operator) {
+  if (typeof(a) == "number") {
+    operation = nextOperation;
+    nextOperation = operator;
+    b = parseInt(nextNumber);
+    a = operation(a,b);
+    displayValue = a;
+    updateValue();
+    displayValue = "";
+  }
+  else if (a == null) {
+    a = parseInt(nextNumber);
+    nextOperation = operator;
+    displayValue = "";
+  }
+
+  if (nextOperation == "equals") {
+    displayValue = a;
+    updateValue();
+  }
+
 }
 
 function updateValue() {
@@ -25,10 +56,6 @@ function updateValue() {
 }
 
 let displayValue = "";
-let numCount = 0;
-let opCount = 0;
-let numArray = [];
-let opArray = [];
 
 const oneBtn = document.querySelector("#one");
 oneBtn.addEventListener('click', () => {
@@ -92,39 +119,27 @@ zeroBtn.addEventListener('click', () => {
 
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener('click', () => {
-  numCount = numArray.push(displayValue);
-  opCount = opArray.push(add);
-  displayValue = "";
+  assignValue(displayValue, add);
 })  
 
 const divBtn = document.querySelector("#divide");
 divBtn.addEventListener('click', () => {
-  numCount = numArray.push(displayValue);
-  opCount = opArray.push(divide);
-  displayValue = "";
+  assignValue(displayValue, divide);
 }) 
 
 const subBtn = document.querySelector("#subtract");
 subBtn.addEventListener('click', () => {
-  numCount = numArray.push(displayValue);
-  opCount = opArray.push(subtract);
-  displayValue = "";
+  assignValue(displayValue, subtract);
 }) 
 
 const multBtn = document.querySelector("#multiply");
 multBtn.addEventListener('click', () => {
-  numCount = numArray.push(displayValue);
-  opCount = opArray.push(multiply);
-  displayValue = "";
+  assignValue(displayValue, multiply);
 }) 
 
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener('click', () => {
-  numCount = numArray.push(displayValue);
-  displayValue = numArray.reduce(operate);
+  assignValue(displayValue, "equals");
   updateValue();
-  numArray = [];
-  opArray = [];
-  displayValue="";
 })
 
