@@ -1,19 +1,35 @@
 //Math Operator functions
 
 add = function(a, b) {
+    if (a == null) {
+      a = 0;
+    }
     return a + b;
 };
 
 subtract = function(a, b) {
-    return a - b;
+  if (a == null) {
+    a = 0;
+  }
+  return a - b;
 };
 
 multiply = function(a, b) {
-    return a * b;
+  if (a == null) {
+    a = 0;
+  }
+  return a * b;
 };
 
+//finish this so it handles divide by 0
 divide = function(a, b,) {
-    return a / b;
+  if (a == null) {
+    a = 0;
+  }
+  if (a = 0) {
+    return 
+  }
+  return a / b;
 };
 
 /* operate = function(a, b, currentIndex) {
@@ -27,12 +43,15 @@ let b = null;
 let operation = null;
 let nextOperation = null;
 
-
+//fixed number - operator - equals (eg. no second number set), however, 
+//if you try and continue throws an error because it tries to call 'equals' as a function when it's a string.
 assignValue = function(nextNumber, operator) {
   if (typeof(a) == "number") {
     operation = nextOperation;
     nextOperation = operator;
-    b = parseInt(nextNumber);
+    if (nextNumber) {
+      b = parseInt(nextNumber);
+    }
     a = operation(a,b);
     displayValue = a;
     updateValue();
@@ -44,15 +63,27 @@ assignValue = function(nextNumber, operator) {
     displayValue = "";
   }
 
-  if (nextOperation == "equals") {
+  if (nextOperation == "equals" && typeof(a) == "number" && typeof(b) == "number" && operation != null) {
     displayValue = a;
     updateValue();
+    displayValue = "";
   }
-
+  else if (nextOperation == "equals") {
+    clear();
+  }
 }
 
 function updateValue() {
   document.getElementsByClassName("display")[0].innerText = displayValue;
+}
+
+function clear() {
+  a = null;
+  b = null;
+  operation = null;
+  nextOperation = null;
+  displayValue = "";
+  updateValue();
 }
 
 let displayValue = "";
@@ -140,6 +171,12 @@ multBtn.addEventListener('click', () => {
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener('click', () => {
   assignValue(displayValue, "equals");
-  updateValue();
+})
+
+const clearBtn = document.querySelector("#clear");
+clearBtn.addEventListener('click', () => {
+  console.log("Clear button pressed");
+  clear();
+  //console.log(`a is: ${a}, b is: ${b}, operation is: ${operation}, next operation is: ${nextOperation}`);
 })
 
