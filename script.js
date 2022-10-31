@@ -21,36 +21,28 @@ multiply = function(a, b) {
   return a * b;
 };
 
-//finish this so it handles divide by 0
-divide = function(a, b,) {
+divide = function(a, b) {
   if (a == null) {
     a = 0;
   }
-  if (a = 0) {
-    return 
+  else if (b == 0) {
+    return "Bozo";
   }
   return a / b;
 };
-
-/* operate = function(a, b, currentIndex) {
-  a=parseInt(a);
-  b=parseInt(b);
-  return opArray[currentIndex-1](a,b);
-} */
 
 let a = null;
 let b = null;
 let operation = null;
 let nextOperation = null;
+let lastButtonWasOperator = false;
 
-//fixed number - operator - equals (eg. no second number set), however, 
-//if you try and continue throws an error because it tries to call 'equals' as a function when it's a string.
 assignValue = function(nextNumber, operator) {
   if (typeof(a) == "number") {
     operation = nextOperation;
     nextOperation = operator;
     if (nextNumber) {
-      b = parseInt(nextNumber);
+      b = parseFloat(nextNumber);
     }
     a = operation(a,b);
     displayValue = a;
@@ -58,23 +50,29 @@ assignValue = function(nextNumber, operator) {
     displayValue = "";
   }
   else if (a == null) {
-    a = parseInt(nextNumber);
+    a = parseFloat(nextNumber);
     nextOperation = operator;
     displayValue = "";
-  }
-
-  if (nextOperation == "equals" && typeof(a) == "number" && typeof(b) == "number" && operation != null) {
-    displayValue = a;
-    updateValue();
-    displayValue = "";
-  }
-  else if (nextOperation == "equals") {
-    clear();
   }
 }
 
 function updateValue() {
-  document.getElementsByClassName("display")[0].innerText = displayValue;
+  let tenDigitHolder = "";
+  let displayValueStr = ""+displayValue;
+  if ((displayValueStr).length > 10) {
+    for (i = 0; i < 10; i++) {
+      tenDigitHolder += (displayValueStr[i]);
+    }
+    if (displayValueStr[10] >= 5) {
+      tenDigitHolder[9] = parseFloat(tenDigitHolder[9]) + 1;
+      tenDigitHolder = ""+tenDigitHolder;
+      console.log(`TDH: ${tenDigitHolder}`);
+    }
+    document.getElementsByClassName("display")[0].innerText = tenDigitHolder;
+  }
+  else {
+    document.getElementsByClassName("display")[0].innerText = displayValue;
+  }
 }
 
 function clear() {
@@ -148,6 +146,12 @@ zeroBtn.addEventListener('click', () => {
   updateValue();
 });
 
+const periodBtn = document.querySelector("#period");
+periodBtn.addEventListener('click', () => {
+  displayValue += ".";
+  updateValue();
+});
+
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener('click', () => {
   assignValue(displayValue, add);
@@ -175,8 +179,6 @@ equalsBtn.addEventListener('click', () => {
 
 const clearBtn = document.querySelector("#clear");
 clearBtn.addEventListener('click', () => {
-  console.log("Clear button pressed");
   clear();
-  //console.log(`a is: ${a}, b is: ${b}, operation is: ${operation}, next operation is: ${nextOperation}`);
 })
 
