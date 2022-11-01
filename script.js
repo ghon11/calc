@@ -1,44 +1,17 @@
-//Math Operator functions
 
-add = function(a, b) {
-    if (a == null) {
-      a = 0;
-    }
-    return a + b;
-};
-
-subtract = function(a, b) {
-  if (a == null) {
-    a = 0;
-  }
-  return a - b;
-};
-
-multiply = function(a, b) {
-  if (a == null) {
-    a = 0;
-  }
-  return a * b;
-};
-
-divide = function(a, b) {
-  if (a == null) {
-    a = 0;
-  }
-  else if (b == 0) {
-    return "Bozo";
-  }
-  return a / b;
-};
 
 let a = null;
 let b = null;
 let operation = null;
 let nextOperation = null;
-let lastButtonWasOperator = false;
+//let lastButtonWasOperator = false;
+let displayValue = "";
 
 assignValue = function(nextNumber, operator) {
-  if (typeof(a) == "number") {
+  if (nextNumber == undefined) {
+    displayValue = "Error";
+  }
+  else if (typeof(a) == "number") {
     operation = nextOperation;
     nextOperation = operator;
     if (nextNumber) {
@@ -48,10 +21,18 @@ assignValue = function(nextNumber, operator) {
     displayValue = a;
     updateValue();
     displayValue = "";
+    if (nextOperation == "equals") {
+      //
+    }
   }
-  else if (a == null) {
+  if (nextNumber) {
     a = parseFloat(nextNumber);
     nextOperation = operator;
+    displayValue = "";
+  }
+  else {
+    displayValue = "Error";
+    updateValue();
     displayValue = "";
   }
 }
@@ -66,7 +47,6 @@ function updateValue() {
     if (displayValueStr[10] >= 5) {
       tenDigitHolder[9] = parseFloat(tenDigitHolder[9]) + 1;
       tenDigitHolder = ""+tenDigitHolder;
-      console.log(`TDH: ${tenDigitHolder}`);
     }
     document.getElementsByClassName("display")[0].innerText = tenDigitHolder;
   }
@@ -74,6 +54,27 @@ function updateValue() {
     document.getElementsByClassName("display")[0].innerText = displayValue;
   }
 }
+
+//Math Operator functions
+
+add = function(a, b) {
+  return a + b;
+};
+
+subtract = function(a, b) {
+return a - b;
+};
+
+multiply = function(a, b) {
+return a * b;
+};
+
+divide = function(a, b) {
+if (b == 0) {
+  return "Bozo";
+}
+else return a / b;
+};
 
 function clear() {
   a = null;
@@ -83,8 +84,6 @@ function clear() {
   displayValue = "";
   updateValue();
 }
-
-let displayValue = "";
 
 const oneBtn = document.querySelector("#one");
 oneBtn.addEventListener('click', () => {
@@ -148,8 +147,10 @@ zeroBtn.addEventListener('click', () => {
 
 const periodBtn = document.querySelector("#period");
 periodBtn.addEventListener('click', () => {
-  displayValue += ".";
-  updateValue();
+  if (!(displayValue.includes("."))) {
+    displayValue += ".";
+    updateValue();
+    }
 });
 
 const addBtn = document.querySelector("#add");
