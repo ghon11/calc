@@ -1,41 +1,38 @@
-
-
 let a = null;
 let b = null;
 let operation = null;
-let nextOperation = null;
-//let lastButtonWasOperator = false;
 let displayValue = "";
 
-assignValue = function(nextNumber, operator) {
-  if (nextNumber == undefined) {
-    displayValue = "Error";
+assignValue = function() {
+/*   if (operation == null || a == null) {
+    a = parseFloat(displayValue);
+    displayValue = "";
   }
-  else if (typeof(a) == "number") {
-    operation = nextOperation;
-    nextOperation = operator;
-    if (nextNumber) {
-      b = parseFloat(nextNumber);
+  else { */
+    if ((a || a==0) && displayValue) {
+      b = parseFloat(displayValue);
+      a = operation(a,b);
+      displayValue = ""+a;
+      updateValue();
+      operation = null;
+      b = null;
+      displayValue = "";
     }
-    a = operation(a,b);
-    displayValue = a;
-    updateValue();
-    displayValue = "";
-    if (nextOperation == "equals") {
-      //
+    else if (a && !displayValue) {
+      return;
+    }
+    else {
+      if (!displayValue) {
+        clear();
+        displayValue = "Error";
+        updateValue();
+        displayValue = "";
+      }
+      a = parseFloat(displayValue);
+      displayValue = "";
     }
   }
-  if (nextNumber) {
-    a = parseFloat(nextNumber);
-    nextOperation = operator;
-    displayValue = "";
-  }
-  else {
-    displayValue = "Error";
-    updateValue();
-    displayValue = "";
-  }
-}
+/* } */
 
 function updateValue() {
   let tenDigitHolder = "";
@@ -48,9 +45,13 @@ function updateValue() {
       tenDigitHolder[9] = parseFloat(tenDigitHolder[9]) + 1;
       tenDigitHolder = ""+tenDigitHolder;
     }
+    document.getElementsByClassName("display")[0].innerText = "";
+    //insert 500ms delay here.
     document.getElementsByClassName("display")[0].innerText = tenDigitHolder;
   }
   else {
+    document.getElementsByClassName("display")[0].innerText = "";
+    //insert 500ms delay here.
     document.getElementsByClassName("display")[0].innerText = displayValue;
   }
 }
@@ -80,7 +81,6 @@ function clear() {
   a = null;
   b = null;
   operation = null;
-  nextOperation = null;
   displayValue = "";
   updateValue();
 }
@@ -155,31 +155,74 @@ periodBtn.addEventListener('click', () => {
 
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener('click', () => {
-  assignValue(displayValue, add);
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = add;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = add;
+  }
 })  
 
 const divBtn = document.querySelector("#divide");
 divBtn.addEventListener('click', () => {
-  assignValue(displayValue, divide);
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = divide;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = divide;
+  }
 }) 
 
 const subBtn = document.querySelector("#subtract");
 subBtn.addEventListener('click', () => {
-  assignValue(displayValue, subtract);
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = subtract;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = subtract;
+  }
 }) 
 
 const multBtn = document.querySelector("#multiply");
 multBtn.addEventListener('click', () => {
-  assignValue(displayValue, multiply);
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = multiply;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = multiply;
+  }
 }) 
 
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener('click', () => {
-  assignValue(displayValue, "equals");
+  assignValue();
 })
 
 const clearBtn = document.querySelector("#clear");
 clearBtn.addEventListener('click', () => {
   clear();
 })
-
