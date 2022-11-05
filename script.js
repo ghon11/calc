@@ -3,39 +3,31 @@ let b = null;
 let operation = null;
 let displayValue = "";
 
-/* assignValue = function() {
-   if (a == null) {
-    a = parseFloat(displayValue);
-    displayValue = "";
-  }
-  else {
-    if ((a || a==0) && displayValue) {
-      b = parseFloat(displayValue);
-      a = operation(a,b);
-      displayValue = ""+a;
-      updateValue();
-      operation = null;
-      b = null;
-      displayValue = "";
-    }
-    else if (a && !displayValue) {
-      return;
-    }
-    else {
-      if (!displayValue) {
-        clear();
-        displayValue = "Error";
-        updateValue();
-        displayValue = "";
-      }
+assignValue = function() {
+  if (a == null) {
+    if (displayValue) {
       a = parseFloat(displayValue);
       displayValue = "";
     }
+    else {
+      a = 0;
+    }
   }
-} */
-
-assignValue = function() {
-  
+  else if ((a || a==0) && displayValue) {
+    b = parseFloat(displayValue);
+    a = operation(a,b);
+    displayValue = ""+a;
+    updateValue();
+    operation = null;
+    b = null;
+    displayValue = "";
+  }
+  else {
+    clear();
+    displayValue = "Error";
+    updateValue();
+    displayValue = "";
+  }
 }
 
 function updateValue() {
@@ -110,17 +102,15 @@ subBtn.addEventListener('click', () => {
 
 const multBtn = document.querySelector("#multiply");
 multBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = multiply;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = multiply;
+  if (displayValue) {
+    if (operation == null) {
+      operation = multiply;
+      assignValue();
+    }
+    else {
+      assignValue();
+      operation = multiply;
+    }
   }
 }) 
 
