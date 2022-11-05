@@ -5,15 +5,10 @@ let displayValue = "";
 
 assignValue = function() {
   if (a == null) {
-    if (displayValue) {
-      a = parseFloat(displayValue);
-      displayValue = "";
-    }
-    else {
-      a = 0;
-    }
+    a = parseFloat(displayValue);
+    displayValue = "";
   }
-  else if ((a || a==0) && displayValue) {
+  else if (a || a==0) {
     b = parseFloat(displayValue);
     a = operation(a,b);
     displayValue = ""+a;
@@ -54,49 +49,43 @@ function updateValue() {
 
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
+  if (displayValue) {
+    if (operation == null) {
+      operation = add;
+      assignValue();
+    }
+/*     else {
+      assignValue();
+      operation = add;
+    } */
   }
-  
-  if (operation == null) {
-    operation = add;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = add;
-  }
-})  
+}) 
 
 const divBtn = document.querySelector("#divide");
 divBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = divide;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = divide;
+  if (displayValue) {
+    if (operation == null) {
+      operation = divide;
+      assignValue();
+    }
+/*     else {
+      assignValue();
+      operation = divide;
+    } */
   }
 }) 
 
 const subBtn = document.querySelector("#subtract");
 subBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = subtract;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = subtract;
+  if (displayValue) {
+    if (operation == null) {
+      operation = subtract;
+      assignValue();
+    }
+/*     else {
+      assignValue();
+      operation = subtract;
+    } */
   }
 }) 
 
@@ -107,10 +96,10 @@ multBtn.addEventListener('click', () => {
       operation = multiply;
       assignValue();
     }
-    else {
+/*     else {
       assignValue();
       operation = multiply;
-    }
+    } */
   }
 }) 
 
