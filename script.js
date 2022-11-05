@@ -3,12 +3,12 @@ let b = null;
 let operation = null;
 let displayValue = "";
 
-assignValue = function() {
-/*   if (operation == null || a == null) {
+/* assignValue = function() {
+   if (a == null) {
     a = parseFloat(displayValue);
     displayValue = "";
   }
-  else { */
+  else {
     if ((a || a==0) && displayValue) {
       b = parseFloat(displayValue);
       a = operation(a,b);
@@ -32,7 +32,11 @@ assignValue = function() {
       displayValue = "";
     }
   }
-/* } */
+} */
+
+assignValue = function() {
+  
+}
 
 function updateValue() {
   let tenDigitHolder = "";
@@ -55,6 +59,80 @@ function updateValue() {
     document.getElementsByClassName("display")[0].innerText = displayValue;
   }
 }
+
+const addBtn = document.querySelector("#add");
+addBtn.addEventListener('click', () => {
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = add;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = add;
+  }
+})  
+
+const divBtn = document.querySelector("#divide");
+divBtn.addEventListener('click', () => {
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = divide;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = divide;
+  }
+}) 
+
+const subBtn = document.querySelector("#subtract");
+subBtn.addEventListener('click', () => {
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = subtract;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = subtract;
+  }
+}) 
+
+const multBtn = document.querySelector("#multiply");
+multBtn.addEventListener('click', () => {
+  if (displayValue == "") {
+    displayValue = "0";
+  }
+  
+  if (operation == null) {
+    operation = multiply;
+    assignValue();
+  }
+  else {
+    assignValue();
+    operation = multiply;
+  }
+}) 
+
+const equalsBtn = document.querySelector("#equals");
+equalsBtn.addEventListener('click', () => {
+  assignValue();
+})
+
+const clearBtn = document.querySelector("#clear");
+clearBtn.addEventListener('click', () => {
+  clear();
+})
 
 //Math Operator functions
 
@@ -153,76 +231,3 @@ periodBtn.addEventListener('click', () => {
     }
 });
 
-const addBtn = document.querySelector("#add");
-addBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = add;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = add;
-  }
-})  
-
-const divBtn = document.querySelector("#divide");
-divBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = divide;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = divide;
-  }
-}) 
-
-const subBtn = document.querySelector("#subtract");
-subBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = subtract;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = subtract;
-  }
-}) 
-
-const multBtn = document.querySelector("#multiply");
-multBtn.addEventListener('click', () => {
-  if (displayValue == "") {
-    displayValue = "0";
-  }
-  
-  if (operation == null) {
-    operation = multiply;
-    assignValue();
-  }
-  else {
-    assignValue();
-    operation = multiply;
-  }
-}) 
-
-const equalsBtn = document.querySelector("#equals");
-equalsBtn.addEventListener('click', () => {
-  assignValue();
-})
-
-const clearBtn = document.querySelector("#clear");
-clearBtn.addEventListener('click', () => {
-  clear();
-})
