@@ -7,7 +7,7 @@ assignValue = function() {
   if (a == null) {
     a = parseFloat(displayValue);
     displayValue = "";
-  }
+  } //could add && operation to else if below?
   else if (a || a==0) {
     b = parseFloat(displayValue);
     a = operation(a,b);
@@ -47,18 +47,22 @@ function updateValue() {
   }
 }
 
+//Use if structure on add for other operator buttons.
+//confirm no errors.
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener('click', () => {
-  if (displayValue) {
     if (operation == null) {
       operation = add;
-      assignValue();
+      if (displayValue) {
+        assignValue();
+      }
     }
-/*     else {
-      assignValue();
+     else {
+      if (displayValue) {
+        assignValue();
+      }
       operation = add;
-    } */
-  }
+    } 
 }) 
 
 const divBtn = document.querySelector("#divide");
@@ -68,10 +72,10 @@ divBtn.addEventListener('click', () => {
       operation = divide;
       assignValue();
     }
-/*     else {
+     else {
       assignValue();
       operation = divide;
-    } */
+    } 
   }
 }) 
 
@@ -82,10 +86,10 @@ subBtn.addEventListener('click', () => {
       operation = subtract;
       assignValue();
     }
-/*     else {
+     else {
       assignValue();
       operation = subtract;
-    } */
+    } 
   }
 }) 
 
@@ -96,16 +100,18 @@ multBtn.addEventListener('click', () => {
       operation = multiply;
       assignValue();
     }
-/*     else {
+     else {
       assignValue();
       operation = multiply;
-    } */
+    } 
   }
 }) 
 
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener('click', () => {
-  assignValue();
+  if (displayValue) {
+    assignValue();
+  }
 })
 
 const clearBtn = document.querySelector("#clear");
